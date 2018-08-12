@@ -3,6 +3,31 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Reflection
+
+I leave the throttle = 0.3, only using PID controller to control the steering.
+
+* Describe the effect each of the P, I, D components had in your implementation.
+P component: Stand for "proportional", steering with an angle equals a proportion to the crosstrack error. Car will overshoots if there is only the p componet. Increasing the P component parameter, the car will oscillates faster.
+
+D component: Stand for "differential", it's used to prevent overshooting and driving more smoothly.
+
+I component: Stand for "integral", it's used to compensate the systematic bias.
+
+* Describe how the final hyperparameters were chosen.
+
+I manually choose the hyperparameters. First, I assumed there is no systematic biases, so make the Ki = 0. Then I tried different combinations(see below):
+
+| Kp | Kd | comments                     |
+|:-: | :-:| :--------------------------: |
+| 1.0| 1.0| go outside and oscillate fast|
+| 0.5| 2.0| go outside once or twice and oscillate fast|
+| 0.2| 3.0| almost always inline and oscillate slowly|
+| 0.1| 3.5| a littele understeering|
+| 0.12| 3.5| good|
+
+It seems the system is good and there is no systematic biases. So I keep the Ki = 0.
+
 ## Dependencies
 
 * cmake >= 3.5
